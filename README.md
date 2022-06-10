@@ -64,8 +64,24 @@ The OS runs in supervisor mode which uses virtual addresses so translating the a
 - main.c:
         Maps memory, sets up interrupts, and inits schedular, pcie subsystems, and the filesystem. Schedules the user paint.elf process.
 
-##Demo: The final assignment to make sure everything works is a userspace program. The user program needs to be read off the file system, use the mouse, be scheduled on the harts, and interact using system calls. Below is a simple painting tool that I made to show almost all of my operating system working together to do something useful.
+## Demo: 
+The final assignment to make sure everything works is a userspace program. The user program needs to be read off the file system, use the mouse, be scheduled on the harts, and interact using system calls. Below is a simple painting tool that I made to show almost all of my operating system working together to do something useful.
 
 ![OSDemo](https://user-images.githubusercontent.com/9009879/173161375-6398540a-ac92-4d28-8235-f615f6709ef7.gif)  
 
+## Running:
+Want to test out my operating system yourself? Here are some instructions to help out for a Linux environment.  
 
+### Get RISC-V Complier and Qemu 
+To complie the code you need the riscv-gnu-toolchain and to run it you can use the Qemu that comes with the riscv-gnu-toolchain.
+```
+git clone --recurse-submodules https://github.com/riscv-collab/riscv-gnu-toolchain.git
+cd riscv-gnu-toolchain
+./configure --prefix=/home/<your home folder>/.local --enable-linux
+make -j4 linux
+mkdir build-qemu
+cd build-qemu
+<path to where you cloned riscv-gnu-toolchain>/qemu/configure --prefix=/home/<your home folder>/.local --target-list=riscv64-softmmu
+make -j5 && make install
+```
+You will also need some VNC viewer to access the screen of the emulation.
