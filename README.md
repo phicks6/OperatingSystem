@@ -5,7 +5,7 @@ Contains the operating system that was programed for my Operating Systems: Desig
 This OS was programmed from the ground up for operating systems class at The University of Tennessee Knoxville. This was a tough class due to the workload it entailed and this project is easily the biggest project that I've worked on by myself. It was designed for a RISC-V architecture with 8 harts in a Qemu emulation. It can be divided into two parts, the SBI, and the actual OS. The SBI acts as an interface between machine mode and supervisor mode and acts as a bios that boots into the OS.  
 Could you actually use this operating system? No, it lacks way too much to be actually useable and definitely has some bugs here and there. However, this was all coded in a single semester and I'm pretty proud of all that I was able to accomplish in that time.
 
-### SBI Overview
+## SBI Overview
 The SBI is the only piece of code that runs in the machine mode, meaning that it is the only way to interact with the plic, clint, and machine mode registers. It exposes these services to the OS through the use of ecalls similar to how user programs request functionally from the OS with system calls.
 The SBI sets up all the harts and puts harts 1-7 to sleep and has hart 0 load into the operating system. The code is located in the sbi directory and has a separate makefile that creates an sbi.elf.  
 
@@ -28,7 +28,7 @@ The SBI sets up all the harts and puts harts 1-7 to sleep and has hart 0 load in
  - main.c:
         This sets up all the harts with physical memory protection and sets up what types of interrupts they can receive. It uses hart 0 as a bootstrap to load into the OS.
 
-### OS Overview:
+## OS Overview:
 The OS runs in supervisor mode which uses virtual addresses so translating the addresses was necessary. It had a page allocator that is primarily used to feed my own version of malloc. The OS is designed to support 5 VirtIO devices through virtual PCIe connections: an entropy device, block device(hard drive), gpu, keyboard, and tablet(mouse). It uses a CFS to schedule processes on the 8 harts. It can read minix3 filesystems and can execute compiled elf files in user mode. 
 
 - sbi.c:
@@ -63,3 +63,9 @@ The OS runs in supervisor mode which uses virtual addresses so translating the a
         Handles timer interrupts, system calls from user mode and identifies various types of faults.
 - main.c:
         Maps memory, sets up interrupts, and inits schedular, pcie subsystems, and the filesystem. Schedules the user paint.elf process.
+
+##Demo: The final assignment to make sure everything works is a userspace program. The user program needs to be read off the file system, use the mouse, be scheduled on the harts, and interact using system calls. Below is a simple painting tool that I made to show almost all of my operating system working together to do something useful.
+
+![OSDemo](https://user-images.githubusercontent.com/9009879/173161375-6398540a-ac92-4d28-8235-f615f6709ef7.gif)  
+
+
