@@ -84,4 +84,8 @@ cd build-qemu
 <path to where you cloned riscv-gnu-toolchain>/qemu/configure --prefix=/home/<your home folder>/.local --target-list=riscv64-softmmu
 make -j5 && make install
 ```
+
+### Makefile
+To run the emulator just run:
+> make run  
 You will also need some VNC viewer to access the screen of the emulation.
