@@ -65,7 +65,7 @@ The OS runs in supervisor mode which uses virtual addresses so translating the a
         Maps memory, sets up interrupts, and inits schedular, pcie subsystems, and the filesystem. Schedules the user paint.elf process.
 
 ## Demo: 
-The final assignment to make sure everything works is a userspace program. The user program needs to be read off the file system, use the mouse, be scheduled on the harts, and interact using system calls. Below is a simple painting tool that I made to show almost all of my operating system working together.
+The final assignment to make sure everything works in a userspace program. The user program needs to be read off the file system, use the mouse, be scheduled on the harts, and interact using system calls. Below is a simple painting tool that I made to show almost all of my operating system working together.
 
 ![OSDemo](https://user-images.githubusercontent.com/9009879/173200742-e1f7b052-ef75-42eb-8b4d-805ab77c6893.gif)
 
